@@ -26,7 +26,7 @@ public class AuthCoreApplication implements CommandLineRunner {
 			System.out.println("Usuario admin nao foi encontrado, criando um novo");
 			UserEntity admin = new UserEntity();
 			admin.setUsername("Admin");
-			admin.setPassword("admin");
+			admin.setPassword("admin"); // TODO implementar cryptografia
 			admin.setAdmin(true);
 			userRepository.save(admin);
 			System.out.println("Usuario admin criado com sucesso.");

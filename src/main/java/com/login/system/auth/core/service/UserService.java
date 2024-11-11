@@ -18,7 +18,6 @@ public class UserService {
     private UserRepository userRepository;
 
     public UserEntity createUser(UserCreateDTO user) {
-        //TODO validar se 1 ou mais dos dados já foram inseridos
 
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new DataIntegrityViolationException("O nome de usuário já está em uso.");
