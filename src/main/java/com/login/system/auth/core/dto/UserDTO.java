@@ -23,9 +23,9 @@ public class UserDTO {
     @Email(message = "Email should be valid")
     public String email;
 
-    @JsonProperty("role")
+    @JsonProperty("isAdmin")
     @NotNull
-    public String role;
+    public boolean isAdmin;
 
     public UserDTO(){}
 
@@ -33,7 +33,7 @@ public class UserDTO {
         this.id = user.getId();
         this.username = user.getUsername();
         this.email = user.getEmail();
-        this.role = user.getRole();
+        this.isAdmin = user.isAdmin();
     }
 
 }
