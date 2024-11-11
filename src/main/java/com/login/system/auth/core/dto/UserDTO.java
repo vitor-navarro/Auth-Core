@@ -23,12 +23,17 @@ public class UserDTO {
     @Email(message = "Email should be valid")
     public String email;
 
+    @JsonProperty("isAdmin")
+    @NotNull
+    public boolean isAdmin;
+
     public UserDTO(){}
 
     public UserDTO(UserEntity user){
         this.id = user.getId();
         this.username = user.getUsername();
         this.email = user.getEmail();
+        this.isAdmin = user.isAdmin();
     }
 
 }

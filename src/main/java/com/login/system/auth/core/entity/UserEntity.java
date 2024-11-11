@@ -27,6 +27,9 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean isAdmin;
+
     public UserEntity() {
     }
 
