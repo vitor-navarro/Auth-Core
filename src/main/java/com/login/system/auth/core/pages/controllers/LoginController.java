@@ -30,12 +30,10 @@ public class LoginController {
         Optional<UserEntity> user = userRepository.findByUsername(username);
 
         if(user.isPresent()){
-
-            System.out.println("entrei no is present");
             UserEntity foundUser = user.get();
 
             if(Objects.equals(foundUser.getPassword(), password) && foundUser.isAdmin()){
-                return new ModelAndView("adminDashboard");
+                return new ModelAndView("redirect:/admin/dashboard");
             } else if (!foundUser.isAdmin()){
                 mv.addObject("error", "O usuário inserido não é um administrador.");
             } else{
