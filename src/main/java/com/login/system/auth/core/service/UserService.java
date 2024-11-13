@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 //TODO serviço de mudança e recuperação de senha
 @Service
@@ -32,11 +33,14 @@ public class UserService {
     }
 
     public UserDTO getUser(Integer id) {
-        if(userRepository.findById(id).isPresent()){
-            UserEntity userEntity = userRepository.findById(id).get();
-            return new UserDTO(userEntity);
-        }
-        return new UserDTO();
+        Optional<UserEntity> userEntity = userRepository.findById(id);
+
+        return userEntity.map(UserDTO::new).orElseGet(UserDTO::new);
+    }
+
+    public UserDTO getUserByUsername(String username){
+        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
+        return userEntity.map(UserDTO::new).orElseGet(UserDTO::new);
     }
 
     public List<UserDTO> getAllUsers(){
@@ -57,4 +61,10 @@ public class UserService {
         UserEntity userEntity = userRepository.findById(id).get();
         userRepository.delete(userEntity);
     }
+
+    public boolean validatePassword(String username, String password){
+        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
+        return userEntity.get().getPassword().equals(password);
+    }
+
 }

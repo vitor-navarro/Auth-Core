@@ -1,4 +1,4 @@
-package com.login.system.auth.core.controllers;
+package com.login.system.auth.core.rest.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;

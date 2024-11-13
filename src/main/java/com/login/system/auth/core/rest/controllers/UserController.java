@@ -1,4 +1,4 @@
-package com.login.system.auth.core.controllers;
+package com.login.system.auth.core.rest.controllers;
 
 import com.login.system.auth.core.dto.UserCreateDTO;
 import com.login.system.auth.core.dto.UserDTO;
