@@ -21,8 +21,9 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public UserDTO getUser(@PathVariable Integer id) {
-        return userService.getUser(id);
+    public ResponseEntity<UserDTO> getUser(@PathVariable Integer id) {
+        UserDTO user = userService.getUser(id);
+        return user != null ? ResponseEntity.ok(user):ResponseEntity.notFound().build();
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "", produces = "application/json")
