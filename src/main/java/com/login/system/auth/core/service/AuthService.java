@@ -1,27 +1,21 @@
 package com.login.system.auth.core.service;
 
-import com.login.system.auth.core.dto.LoginDTO;
-import com.login.system.auth.core.dto.UserDTO;
+import com.login.system.auth.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
-public class AuthService {
+public class AuthService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
-    //TODO adicionar password encoder
-    public boolean authenticate(LoginDTO loginDTO){
-
-        UserDTO user = userService.getUserByUsername(loginDTO.getUsername());
-
-        if(Objects.equals(loginDTO.getUsername(), user.getUsername())){
-            return userService.validatePassword(loginDTO.getUsername(), loginDTO.getPassword());
-        }
-
-        return false;
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

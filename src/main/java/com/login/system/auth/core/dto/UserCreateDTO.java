@@ -2,6 +2,7 @@ package com.login.system.auth.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.login.system.auth.core.entity.UserEntity;
+import com.login.system.auth.core.enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

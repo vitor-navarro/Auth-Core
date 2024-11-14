@@ -3,9 +3,11 @@ package com.login.system.auth.core.service;
 import com.login.system.auth.core.dto.UserCreateDTO;
 import com.login.system.auth.core.dto.UserDTO;
 import com.login.system.auth.core.entity.UserEntity;
+import com.login.system.auth.core.enums.UserRole;
 import com.login.system.auth.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class UserService {
 
     public UserEntity createUser(UserCreateDTO user) {
 
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
             throw new DataIntegrityViolationException("O nome de usuário já está em uso.");
         }
 
@@ -38,10 +40,16 @@ public class UserService {
         return userEntity.map(UserDTO::new).orElseGet(UserDTO::new);
     }
 
-    public UserDTO getUserByUsername(String username){
-        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
-        return userEntity.map(UserDTO::new).orElseGet(UserDTO::new);
+    public UserDTO getUserByUsername(String username) {
+        UserDetails userDetails = userRepository.findByUsername(username);
+
+        if (userDetails instanceof UserEntity) {
+            return new UserDTO((UserEntity) userDetails);
+        }
+
+        return new UserDTO(); // Retorna um UserDTO vazio caso o usuário não seja encontrado ou não seja um UserEntity
     }
+
 
     public List<UserDTO> getAllUsers(){
         List<UserEntity> users = userRepository.findAll();
@@ -62,9 +70,15 @@ public class UserService {
         userRepository.delete(userEntity);
     }
 
-    public boolean validatePassword(String username, String password){
-        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
-        return userEntity.get().getPassword().equals(password);
+    public boolean validatePassword(String username, String password) {
+        UserDetails userDetails = userRepository.findByUsername(username);
+
+        if (userDetails instanceof UserEntity userEntity) {
+            return userEntity.getPassword().equals(password);
+        }
+
+        return false; // Retorna false se o usuário não for encontrado ou não for uma instância de UserEntity
     }
+
 
 }
