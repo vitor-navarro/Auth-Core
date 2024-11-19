@@ -1,6 +1,5 @@
 package com.login.system.auth.core.entity;
 
-import com.login.system.auth.core.dto.UserCreateDTO;
 import com.login.system.auth.core.dto.UserDTO;
 import com.login.system.auth.core.enums.UserRole;
 import jakarta.persistence.*;
@@ -9,7 +8,6 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -47,10 +45,6 @@ public class UserEntity implements UserDetails {
     }
 
     public UserEntity(UserDTO user){
-        BeanUtils.copyProperties(user, this);
-    }
-
-    public UserEntity(UserCreateDTO user){
         BeanUtils.copyProperties(user, this);
     }
 

@@ -1,12 +1,9 @@
 package com.login.system.auth.core.service;
 
-import com.login.system.auth.core.dto.UserCreateDTO;
 import com.login.system.auth.core.dto.UserDTO;
 import com.login.system.auth.core.entity.UserEntity;
-import com.login.system.auth.core.enums.UserRole;
 import com.login.system.auth.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +16,6 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    public UserEntity createUser(UserCreateDTO user) {
-
-        if (userRepository.findByUsername(user.getUsername()) != null) {
-            throw new DataIntegrityViolationException("O nome de usuário já está em uso.");
-        }
-
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new DataIntegrityViolationException("O e-mail já está em uso.");
-        }
-
-        UserEntity userEntity = new UserEntity(user);
-        return userRepository.save(userEntity);
-    }
 
     public UserDTO getUser(Integer id) {
         Optional<UserEntity> userEntity = userRepository.findById(id);

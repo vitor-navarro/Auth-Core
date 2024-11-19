@@ -1,8 +1,6 @@
 package com.login.system.auth.core.rest.controllers;
 
-import com.login.system.auth.core.dto.UserCreateDTO;
 import com.login.system.auth.core.dto.UserDTO;
-import com.login.system.auth.core.entity.UserEntity;
 import com.login.system.auth.core.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +28,6 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, path = "", produces = "application/json")
     public List<UserDTO> geAllUsers(){
         return userService.getAllUsers();
-    }
-
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserEntity createUser(@Valid @RequestBody UserCreateDTO user) {
-        return userService.createUser(user);
     }
 
     @PutMapping(path = "/update")
