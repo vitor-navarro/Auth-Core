@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+//TODO a criação de usuário foi transferida para o authentication controller
 @RestController
 @RequestMapping(path = "/users")
 public class UserController {

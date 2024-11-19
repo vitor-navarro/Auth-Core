@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
+//TODO remover o userCreateDTO, após a implementação do Spring Security a responsabilidade de criação de usuário foi transferida do userController para o AuthenticationController.
 @Getter
 @Setter
 public class UserCreateDTO {

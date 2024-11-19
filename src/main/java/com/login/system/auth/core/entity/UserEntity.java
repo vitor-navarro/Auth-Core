@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -38,6 +39,11 @@ public class UserEntity implements UserDetails {
     private UserRole role = UserRole.USER;
 
     public UserEntity() {
+    }
+
+    public UserEntity(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
     public UserEntity(UserDTO user){
