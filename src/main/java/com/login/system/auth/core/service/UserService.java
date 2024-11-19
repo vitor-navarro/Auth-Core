@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-//TODO criação de um serviço de recuperação de senha, a criação do usuário foi transferida para o Authentication controller.
+//TODO criação de um serviço de recuperação de senha
 @Service
 public class UserService {
 
